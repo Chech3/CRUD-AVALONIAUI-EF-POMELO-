@@ -9,7 +9,7 @@ public class AppDbContext:DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = "";
+        var connectionString = "server=localhost;database=personaDB;user=root;password=";
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 }
