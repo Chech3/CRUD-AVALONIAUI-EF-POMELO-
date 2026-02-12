@@ -5,18 +5,20 @@ namespace PersonaApp.Helpers;
 
 public class RelayCommand : ICommand
 {
-    private readonly Action execute;
-    private readonly Func<bool> canExecute;
-    
-    public bool CanExecute(object? parameter)
+    private readonly Action _execute;
+    private readonly Func<bool> _canExecute;
+
+    public RelayCommand(Action execute, Func<bool>? canExecute = null)
     {
-        throw new NotImplementedException();
+        _execute = execute;
+        _canExecute = canExecute;
     }
 
-    public void Execute(object? parameter)
-    {
-        throw new NotImplementedException();
-    }
+    public bool CanExecute(object? parameter) => _canExecute?.Invoke() ?? true;
+
+
+    public void Execute(object? parameter) => _execute();
+ 
 
     public event EventHandler? CanExecuteChanged;
 }
