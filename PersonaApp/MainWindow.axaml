@@ -2,8 +2,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="clr-namespace:PersonaApp.ViewModels"
+        xmlns:views="clr-namespace:PersonaApp.Views"
+        mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="700"
         x:Class="PersonaApp.MainWindow"
-        Title="PersonaApp">
-    Welcome to Avalonia!
+        x:DataType="vm:PersonaViewModel"
+        Title="Gestión de Personas"
+        Background="{DynamicResource PageBackground}"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <vm:PersonaViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto, *">
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{DynamicResource HeaderBackground}" Padding="20,15" BoxShadow="{DynamicResource HeaderShadow}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
+                <TextBlock Text="👤" FontSize="24" VerticalAlignment="Center"/>
+                <TextBlock Text="Sistema de Gestión de Personas" Classes="h1" Margin="0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" ColumnDefinitions="*, 400" Margin="20" ColumnSpacing="20">
+            <!-- Left Side: Table -->
+            <Border Grid.Column="0" Classes="card">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Listado de Personas" Classes="h2" Margin="0,0,0,15"/>
+                    <DataGrid ItemsSource="{Binding Personas}" 
+                              SelectedItem="{Binding SelectedPersona}"
+                              AutoGenerateColumns="False" 
+                              IsReadOnly="True"
+                              GridLinesVisibility="Horizontal"
+                              RowHeight="50">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                            <DataGridTextColumn Header="Fecha Nacimiento" Binding="{Binding FechaNacimiento, StringFormat=\{0:dd/MM/yyyy\}}" Width="180"/>
+                            <DataGridTextColumn Header="Género" Binding="{Binding Genero}" Width="120"/>
+                            <DataGridCheckBoxColumn Header="Acepta Términos" Binding="{Binding AceptaTerminos}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <!-- Right Side: Form -->
+            <views:PersonaFormControl Grid.Column="1"/>
+        </Grid>
+    </Grid>
 </Window>

@@ -4,7 +4,104 @@
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="PageBackground">#F1F5F9</SolidColorBrush>
+                    <SolidColorBrush x:Key="CardBackground">White</SolidColorBrush>
+                    <SolidColorBrush x:Key="HeaderBackground">White</SolidColorBrush>
+                    <SolidColorBrush x:Key="PrimaryText">#1A1A1A</SolidColorBrush>
+                    <SolidColorBrush x:Key="SecondaryText">#666666</SolidColorBrush>
+                    <SolidColorBrush x:Key="BorderColor">#E2E8F0</SolidColorBrush>
+                    <BoxShadows x:Key="CardShadow">0 4 10 0 #15000000</BoxShadows>
+                    <BoxShadows x:Key="HeaderShadow">0 2 5 0 #10000000</BoxShadows>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="PageBackground">#0F172A</SolidColorBrush>
+                    <SolidColorBrush x:Key="CardBackground">#1E293B</SolidColorBrush>
+                    <SolidColorBrush x:Key="HeaderBackground">#1E293B</SolidColorBrush>
+                    <SolidColorBrush x:Key="PrimaryText">#F8FAFC</SolidColorBrush>
+                    <SolidColorBrush x:Key="SecondaryText">#94A3B8</SolidColorBrush>
+                    <SolidColorBrush x:Key="BorderColor">#334155</SolidColorBrush>
+                    <BoxShadows x:Key="CardShadow">0 4 10 0 #40000000</BoxShadows>
+                    <BoxShadows x:Key="HeaderShadow">0 2 5 0 #40000000</BoxShadows>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        
+        <!-- Global Styles -->
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+        </Style>
+
+        <Style Selector="TextBlock.h2">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+        </Style>
+
+        <Style Selector="TextBlock.label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="{DynamicResource SecondaryText}"/>
+        </Style>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BoxShadow" Value="{DynamicResource CardShadow}"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <!-- Button Styles -->
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.primary /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#1D4ED8"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="#64748B"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="#EF4444"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="DataGrid">
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+        </Style>
     </Application.Styles>
 </Application>

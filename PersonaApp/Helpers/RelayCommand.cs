@@ -6,7 +6,7 @@ namespace PersonaApp.Helpers;
 public class RelayCommand : ICommand
 {
     private readonly Action _execute;
-    private readonly Func<bool> _canExecute;
+    private readonly Func<bool>? _canExecute;
 
     public RelayCommand(Action execute, Func<bool>? canExecute = null)
     {
@@ -21,4 +21,9 @@ public class RelayCommand : ICommand
  
 
     public event EventHandler? CanExecuteChanged;
+
+    public void RaiseCanExecuteChanged()
+    {
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+    }
 }
